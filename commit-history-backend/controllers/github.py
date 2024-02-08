@@ -62,9 +62,11 @@ class GithubController:
 
             for commit in history:
                 result = {"commit": commit["commit"]}
-                result["commit"]["author"]["avatar"] = commit["committer"]["avatar_url"]
-                result["html_url"] = commit["html_url"]
 
+                result["commit"]["author"]["avatar"] = (
+                    commit["committer"]["avatar_url"] if commit["committer"] else None
+                )
+                result["html_url"] = commit["html_url"]
                 data.append(result)
             return data
 
