@@ -1,0 +1,6 @@
+Flask==3.0.2
+flask-cors==1.10.3
+python-dotenv==1.0.0
+flask-json-schema==0.0.5
+flask-expects-json==1.7.0
+requests==2.31.0
