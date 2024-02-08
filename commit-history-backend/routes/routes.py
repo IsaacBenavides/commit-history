@@ -1,3 +1,3 @@
 class GithubRoutes:
-    REPO_INFO = "/repo-info"
-    REPO_HISTORY = "/repo-history/"
+    REPO_INFO = "/api/v1/repo-info/"
+    REPO_HISTORY = "/api/v1/repo-history/"
