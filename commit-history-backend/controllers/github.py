@@ -29,18 +29,19 @@ class GithubController:
                     error_code=NOT_FOUND,
                     status_code=404,
                 )
-            user = response.json()["owner"]["login"]
-            updated_at = response.json()["updated_at"]
-            name = response.json()["name"]
-            starts = response.json()["stargazers_count"]
-            forks = response.json()["forks_count"]
-            return {
-                "user": user,
-                "updated_at": updated_at,
-                "name": name,
-                "starts": starts,
-                "forks": forks,
+
+            result = {
+                "owner": response.json()["owner"],
+                "updated_at": response.json()["updated_at"],
+                "name": response.json()["name"],
+                "starts": response.json()["stargazers_count"],
+                "forks": response.json()["forks_count"],
+                "issues": response.json()["open_issues_count"],
+                "private": response.json()["private"],
+                "issue_url": response.json()["issues_url"],
             }
+
+            return response.json()
         except Exception as e:
             raise e
 
