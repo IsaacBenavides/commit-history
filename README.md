@@ -1,5 +1,5 @@
 <div align="center" style="margin-bottom:40px;">
-<h3 style="font-size:40px">Commit History</h2>
+<h3 style="font-size:60px">Commit History</h2>
 <p>technical test for the position of <strong>Flutter developer</strong> at FULLTIMEFORCE</p>
 </div>
 
