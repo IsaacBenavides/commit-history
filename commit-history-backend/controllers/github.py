@@ -1,4 +1,4 @@
-from errors import MOVED_PERMANENTLY, FORBIDDEN, NOT_FOUND, REPO_REQUIRED
+from errors import MOVED_PERMANENTLY, FORBIDDEN, NOT_FOUND, REPO_REQUIRED, SERVER_ERROR
 from models.github import GithubModel
 from exceptions import InvalidUsage
 
@@ -29,6 +29,12 @@ class GithubController:
                     error_code=NOT_FOUND,
                     status_code=404,
                 )
+            if response.status_code != 200:
+                raise InvalidUsage(
+                    message="Server Error",
+                    error_code=SERVER_ERROR,
+                    status_code=500,
+                )
 
             result = {
                 "owner": response.json()["owner"],
@@ -54,6 +60,13 @@ class GithubController:
                     error_code=REPO_REQUIRED,
                 )
             response = self.github_model.get_repo_history(repo=repo)
+
+            if response.status_code != 200:
+                raise InvalidUsage(
+                    message="Server Error",
+                    error_code=SERVER_ERROR,
+                    status_code=500,
+                )
 
             if "Git Repository is empty." in response.text:
                 return []

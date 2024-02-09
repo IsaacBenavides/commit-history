@@ -51,10 +51,29 @@ class TestGithubController(unittest.TestCase):
         self.assertRaises(InvalidUsage, self.github_controller.get_repo_info)
         self.assertRaisesWithMessage("Not FOUND", self.github_controller.get_repo_info)
 
+    def test_get_repo_info_error_500(self):
+        response_mock = MagicMock()
+        response_mock.status_code = 500
+        self.github_model_mock.get_repo_info.return_value = response_mock
+        self.assertRaises(InvalidUsage, self.github_controller.get_repo_info)
+        self.assertRaisesWithMessage(
+            "Server Error", self.github_controller.get_repo_info
+        )
+
     def test_get_repo_history_empty_repo(self):
         self.assertRaises(InvalidUsage, self.github_controller.get_repo_history, None)
         self.assertRaisesWithMessage(
             "repo is required", self.github_controller.get_repo_history, None
+        )
+
+    def test_get_repo_info_error_500(self):
+        repo = "test_repo"
+        response_mock = MagicMock()
+        response_mock.status_code = 500
+        self.github_model_mock.get_repo_history.return_value = response_mock
+        self.assertRaises(InvalidUsage, self.github_controller.get_repo_history, repo)
+        self.assertRaisesWithMessage(
+            "Server Error", self.github_controller.get_repo_history, repo
         )
 
     def test_get_repo_history_empty_response(self):
