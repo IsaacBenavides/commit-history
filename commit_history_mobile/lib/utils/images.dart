@@ -8,4 +8,6 @@ class AppIcons {
   static const String issues = "assets/icons/issues.svg";
   static const String forks = "assets/icons/forks.svg";
   static const String start = "assets/icons/start.svg";
+  static const String actions = "assets/icons/actions.svg";
+  static const String pullRequest = "assets/icons/pull-request.svg";
 }

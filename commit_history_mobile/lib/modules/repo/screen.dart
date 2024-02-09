@@ -1,5 +1,6 @@
 import 'package:commit_history_mobile/modules/repo/bloc/repo/repo_bloc.dart';
 import 'package:commit_history_mobile/modules/repo/repo_content.dart';
+import 'package:commit_history_mobile/ui/theme/colors.dart';
 import 'package:commit_history_mobile/ui/widgets/custom_text.dart';
 import 'package:commit_history_mobile/ui/widgets/scaffold_with_safe_area.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class RepoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RepoBloc(),
+      create: (_) => RepoBloc(),
       child: const RepoView(),
     );
   }
@@ -51,7 +52,11 @@ class _RepoViewState extends State<RepoView>
         builder: (context, state) {
           switch (state.runtimeType) {
             case RepoFetchingLoadingState:
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(
+                  color: CustomColors.green,
+                ),
+              );
             case RepoFetchingSuccess:
               final newState = state as RepoFetchingSuccess;
               return RepoContent(repoResponse: newState.repoResponse);

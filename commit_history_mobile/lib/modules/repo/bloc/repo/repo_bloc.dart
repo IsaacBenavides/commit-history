@@ -20,7 +20,9 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
   }
 
   FutureOr<void> getRepoInfo(
-      RepoInitialFetchEvent event, Emitter<RepoState> emit) async {
+    RepoInitialFetchEvent event,
+    Emitter<RepoState> emit,
+  ) async {
     emit(RepoFetchingLoadingState());
 
     try {

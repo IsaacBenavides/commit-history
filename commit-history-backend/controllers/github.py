@@ -41,7 +41,7 @@ class GithubController:
                 "issue_url": response.json()["issues_url"],
             }
 
-            return response.json()
+            return result
         except Exception as e:
             raise e
 
@@ -63,10 +63,10 @@ class GithubController:
 
             for commit in history:
                 result = {"commit": commit["commit"]}
-
                 result["commit"]["author"]["avatar"] = (
                     commit["committer"]["avatar_url"] if commit["committer"] else None
                 )
+                result["commit"]["author"]["login"] = commit["author"]["login"]
                 result["html_url"] = commit["html_url"]
                 data.append(result)
             return data

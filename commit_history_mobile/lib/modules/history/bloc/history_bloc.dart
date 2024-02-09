@@ -1,4 +1,13 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:commit_history_mobile/data/repository/base.dart';
+import 'package:commit_history_mobile/data/repository/repo.dart';
+import 'package:commit_history_mobile/data/uses_cases/base.dart';
+import 'package:commit_history_mobile/data/uses_cases/get_repo_history.dart';
+import 'package:commit_history_mobile/models/api/history_response.dart';
 import 'package:meta/meta.dart';
 
 part 'history_event.dart';
@@ -6,8 +15,31 @@ part 'history_state.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   HistoryBloc() : super(HistoryInitial()) {
-    on<HistoryEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<HistoryInitialFetchEvent>(getHistory);
+  }
+
+  getHistory(
+    HistoryInitialFetchEvent event,
+    Emitter<HistoryState> emit,
+  ) async {
+    emit(HistoryFetchingLoadingState());
+    final GetRepoHistoryUseCase getRepoHistoryUseCase = GetRepoHistoryUseCase(
+      repoRepository: RepoRepository(
+        baseRepository: BaseRepository(),
+      ),
+    );
+    try {
+      final List<HistoryResponse> historyList =
+          await getRepoHistoryUseCase.call();
+      emit(HistorySuccessState(historyList: historyList));
+    } on UseCaseException catch (e) {
+      emit(HistoryFetchingError(message: e.message));
+    } on SocketException {
+      emit(HistoryFetchingError(message: "we have a connection problem"));
+    } catch (e) {
+      emit(
+        HistoryFetchingError(message: "There was a mistake. Try again later"),
+      );
+    }
   }
 }

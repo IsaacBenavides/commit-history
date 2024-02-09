@@ -31,6 +31,19 @@ class RepoContentMiddleSection extends StatelessWidget {
             value: (repoResponse.issues ?? 0).toString(),
           ),
           _Item(
+            icon: AppIcons.pullRequest,
+            indicatorColor: CustomColors.blue,
+            text: 'Pull Requests',
+            onTap: () => Navigator.of(context).pushNamed(Routes.history),
+            value: 0.toString(),
+          ),
+          _Item(
+            icon: AppIcons.actions,
+            indicatorColor: CustomColors.chocolate,
+            text: 'Actions',
+            onTap: () => Navigator.of(context).pushNamed(Routes.history),
+          ),
+          _Item(
             icon: AppIcons.commits,
             indicatorColor: CustomColors.secondGrey,
             text: 'Commits',
@@ -69,8 +82,8 @@ class _Item extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 40.sp,
-                  height: 40.sp,
+                  width: 32.sp,
+                  height: 32.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.sp),
                     color: indicatorColor,
@@ -79,6 +92,7 @@ class _Item extends StatelessWidget {
                   child: SvgPicture.asset(
                     icon,
                     theme: const SvgTheme(currentColor: Colors.white),
+                    width: 16.sp,
                   ),
                 ),
                 gapW12,

@@ -8,4 +8,8 @@ class RepoRepository {
   Future<http.Response> getRepoInfo() {
     return baseRepository.get("/repo-info/");
   }
+
+  Future<http.Response> getRepoHistory() {
+    return baseRepository.get("/repo-history/?repo=commit-history");
+  }
 }

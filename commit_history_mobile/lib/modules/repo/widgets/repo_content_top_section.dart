@@ -23,6 +23,7 @@ class RepoContentTopSection extends StatelessWidget {
           theme: const SvgTheme(
             currentColor: Colors.white,
           ),
+          width: 12.sp,
         ),
         gapW4,
         RichText(
