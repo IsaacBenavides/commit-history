@@ -7,9 +7,7 @@ from repository.base import BaseRepository
 github_views = Blueprint("github_views", __name__)
 
 
-github_controller = GithubController(
-    github_model=GithubModel(baseRepository=BaseRepository())
-)
+github_controller = GithubController()
 
 
 @github_views.route(GithubRoutes.REPO_INFO, methods=["GET"])

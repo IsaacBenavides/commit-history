@@ -5,8 +5,8 @@ from exceptions import InvalidUsage
 
 class GithubController:
 
-    def __init__(self, github_model: GithubModel) -> None:
-        self.github_model = github_model
+    def __init__(self) -> None:
+        self.github_model = GithubModel()
 
     def get_repo_info(self):
         try:
