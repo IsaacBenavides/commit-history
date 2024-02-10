@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:commit_history_mobile/data/uses_cases/base.dart';
 import 'package:commit_history_mobile/data/uses_cases/get_repo_history.dart';
 import 'package:commit_history_mobile/models/api/history_response.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'history_event.dart';
