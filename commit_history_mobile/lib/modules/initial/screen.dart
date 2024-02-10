@@ -3,6 +3,7 @@ import 'package:commit_history_mobile/ui/widgets/custom_button.dart';
 import 'package:commit_history_mobile/ui/widgets/custom_text.dart';
 import 'package:commit_history_mobile/ui/widgets/scaffold_with_safe_area.dart';
 import 'package:commit_history_mobile/utils/images.dart';
+import 'package:commit_history_mobile/utils/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,12 +13,13 @@ class InitialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldWithSafeArea(
+    return ScaffoldWithSafeArea(
       body: Center(
         child: Column(
           children: [
-            MainContent(),
-            BottomContent(),
+            const MainContent(),
+            const BottomContent(),
+            gapH12,
           ],
         ),
       ),
