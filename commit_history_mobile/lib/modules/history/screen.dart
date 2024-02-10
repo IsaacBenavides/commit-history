@@ -1,3 +1,6 @@
+import 'package:commit_history_mobile/data/repository/base.dart';
+import 'package:commit_history_mobile/data/repository/repo.dart';
+import 'package:commit_history_mobile/data/uses_cases/get_repo_history.dart';
 import 'package:commit_history_mobile/modules/history/bloc/history_bloc.dart';
 import 'package:commit_history_mobile/modules/history/history_list.dart';
 import 'package:commit_history_mobile/ui/theme/colors.dart';
@@ -12,7 +15,13 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HistoryBloc(),
+      create: (_) => HistoryBloc(
+        getRepoHistoryUseCase: GetRepoHistoryUseCase(
+          repoRepository: RepoRepository(
+            baseRepository: BaseRepository(),
+          ),
+        ),
+      ),
       child: const HistoryView(),
     );
   }

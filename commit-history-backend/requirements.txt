@@ -4,3 +4,4 @@ python-dotenv==1.0.0
 flask-json-schema==0.0.5
 flask-expects-json==1.7.0
 requests==2.31.0
+Flask-Testing==0.8.1

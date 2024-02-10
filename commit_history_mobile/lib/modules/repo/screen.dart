@@ -1,3 +1,6 @@
+import 'package:commit_history_mobile/data/repository/base.dart';
+import 'package:commit_history_mobile/data/repository/repo.dart';
+import 'package:commit_history_mobile/data/uses_cases/get_repo_info.dart';
 import 'package:commit_history_mobile/modules/repo/bloc/repo/repo_bloc.dart';
 import 'package:commit_history_mobile/modules/repo/repo_content.dart';
 import 'package:commit_history_mobile/ui/theme/colors.dart';
@@ -12,7 +15,13 @@ class RepoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => RepoBloc(),
+      create: (_) => RepoBloc(
+        getRepoInfoUseCase: GetRepoInfoUseCase(
+          repoRepository: RepoRepository(
+            baseRepository: BaseRepository(),
+          ),
+        ),
+      ),
       child: const RepoView(),
     );
   }

@@ -71,3 +71,17 @@ flutter run -d iPhone
 ```
 
 You must write the name of the device on which you want to run the application.
+
+## 🧪 Run Test
+
+1. Backend
+
+```bash
+sudo docker-compose run web python -m unittest discover -v
+```
+
+2. Application
+
+```bash
+flutter test
+```

@@ -3,8 +3,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:commit_history_mobile/data/repository/base.dart';
-import 'package:commit_history_mobile/data/repository/repo.dart';
 import 'package:commit_history_mobile/data/uses_cases/base.dart';
 import 'package:commit_history_mobile/data/uses_cases/get_repo_history.dart';
 import 'package:commit_history_mobile/models/api/history_response.dart';
@@ -14,7 +12,8 @@ part 'history_event.dart';
 part 'history_state.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
-  HistoryBloc() : super(HistoryInitial()) {
+  final GetRepoHistoryUseCase getRepoHistoryUseCase;
+  HistoryBloc({required this.getRepoHistoryUseCase}) : super(HistoryInitial()) {
     on<HistoryInitialFetchEvent>(getHistory);
   }
 
@@ -23,11 +22,6 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     Emitter<HistoryState> emit,
   ) async {
     emit(HistoryFetchingLoadingState());
-    final GetRepoHistoryUseCase getRepoHistoryUseCase = GetRepoHistoryUseCase(
-      repoRepository: RepoRepository(
-        baseRepository: BaseRepository(),
-      ),
-    );
     try {
       final List<HistoryResponse> historyList =
           await getRepoHistoryUseCase.call();

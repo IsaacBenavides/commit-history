@@ -1,12 +1,8 @@
 from flask import Blueprint, request
 from routes.routes import GithubRoutes
 from controllers.github import GithubController
-from models.github import GithubModel
-from repository.base import BaseRepository
 
 github_views = Blueprint("github_views", __name__)
-
-
 github_controller = GithubController()
 
 
